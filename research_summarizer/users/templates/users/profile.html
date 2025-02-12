@@ -1,0 +1,27 @@
+<!-- users/templates/users/profile.html -->
+
+<div class="container mt-4">
+    <h2>{{ user.username }}'s Profile</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Profile Picture:</strong></p>
+    {% if user.profile_picture %}
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture" width="150" class="img-thumbnail">
+    {% else %}
+        <p>No profile picture uploaded.</p>
+    {% endif %}
+    
+    <h3>Uploaded Research Papers</h3>
+    <ul class="list-group">
+        {% for paper in papers %}
+            <li class="list-group-item">
+                <strong>{{ paper.title }}</strong><br>
+                <a href="{{ paper.uploaded_file.url }}" target="_blank" class="btn btn-info btn-sm">Download</a><br>
+                <p>{{ paper.description }}</p>
+                <a href="{{ paper.short_video }}" target="_blank" class="btn btn-primary btn-sm">Short Video</a>
+                <a href="{{ paper.long_video }}" target="_blank" class="btn btn-secondary btn-sm">Long Video</a>
+            </li>
+        {% empty %}
+            <p>No research papers uploaded yet.</p>
+        {% endfor %}
+    </ul>
+</div>

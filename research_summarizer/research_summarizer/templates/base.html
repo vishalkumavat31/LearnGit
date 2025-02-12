@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Research Summarizer{% endblock %}</title>
+    <!-- Add this inside the <head> tag of base.html -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1>Research Paper Summarizer</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a> |
+            <a href="{% url 'signup' %}">Sign Up</a> |
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'upload_research_paper' %}">Upload Paper</a> |
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' username=user.username %}">Profile</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login to View Profile</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
